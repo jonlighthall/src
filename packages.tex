@@ -194,8 +194,8 @@ citecolor=black,               %makes citation links black (instead of green)
 \renewcommand{\AMeV}{MeV/nucleon} %new standard
 
 %  Load autotext, an collection of automatic text-generating macros
-\InputIfFileExists{src/autotext}{}{} 
-\InputIfFileExists{../src/autotext}{}{} 
+\InputIfFileExists{src/autotext}{}{% 
+\InputIfFileExists{../src/autotext}{}{}}
 
 %\renewcommand{\thefootnote}{\fnsymbol{footnote}} %sets footnote marks to symbols
 
