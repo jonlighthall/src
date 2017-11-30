@@ -194,23 +194,30 @@ citecolor=black,               %makes citation links black (instead of green)
 \renewcommand{\AMeV}{MeV/nucleon} %new standard
 
 %  Load autotext, an collection of automatic text-generating macros
-\InputIfFileExists{src/autotext}{}{% 
-\InputIfFileExists{../src/autotext}{}{}}
+\InputIfFileExists{src/autotext}{}{%
+\InputIfFileExists{../src/autotext}{}{%
+\InputIfFileExists{../../src/autotext}{}{}}} 
 
 %\renewcommand{\thefootnote}{\fnsymbol{footnote}} %sets footnote marks to symbols
 
 %% Date settings-----------------%-------------------------------
 \usepackage{fmtcount,datetime} %provides commands for displaying times and dates
-\newdateformat{photodate}{\shortmonthname[\THEMONTH].~\THEYEAR}
+\newdateformat{photodate}{\shortmonthname[\THEMONTH]~\THEYEAR}
 \newdateformat{longusdate}{%standard long date format
 \dayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR}, \monthname[\THEMONTH] \ordinal{DAY}, \THEYEAR}
+\newdateformat{shortusdate}{%standard long date format
+\shortdayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR}, \shortmonthname[\THEMONTH] \ordinal{DAY}, \THEYEAR}
+
 %  Time zone definitions, for the command \timezone.
 \makeatletter
-\@namedef{timezone-0400}{EDT}
+%\@namedef{timezone-0400}{EDT}
+%\@namedef{timezone-0500}{CDT}
+%\@namedef{timezone-0600}{MDT}
+%\@namedef{timezone-0700}{PDT}
+
 \@namedef{timezone-0500}{EST}
 \@namedef{timezone-0600}{CST}
-\@namedef{timezone-0500}{CDT}
-\@namedef{timezone-0700}{PDT}
+\@namedef{timezone-0700}{MST}
 \@namedef{timezone-0800}{PST}
 
 \def\grabtimezone #1#2#3#4#5#6#7#8#9{\grabtimezoneB}
@@ -223,11 +230,7 @@ citecolor=black,               %makes citation links black (instead of green)
 \def\timezone{\expandafter\grabtimezone\pdfcreationdate}% called with \timezone.
 \makeatother
 
-\newcommand{\curl}[1]{%
-\begin{center}
-	\url{#1}
-\end{center}
-}
+\newcommand{\smalltimestamp}{Updated \shortusdate\today{} \currenttime{} \timezone.}
 
 %% --------------------------------------------------------------
 %% Layout Options----------------%-------------------------------
@@ -278,3 +281,9 @@ citecolor=black,               %makes citation links black (instead of green)
 \setlength{\parsep}{\parskip}%
 }%\centering%
 \item[]}{\end{list}}
+
+\newcommand{\curl}[1]{%
+\begin{center}
+	\url{#1}
+\end{center}
+}
