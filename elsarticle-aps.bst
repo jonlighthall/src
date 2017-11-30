@@ -1792,8 +1792,8 @@ FUNCTION {begin.bib}
     'skip$
     { preamble$ write$ newline$ }
   if$
-  %  "\begin{thebibliography}{"  longest.label  * "}" *
-  "\begin{thebibliography}{99}" 
+  "\begin{thebibliography}{"  longest.label  * "}" *
+  %"\begin{thebibliography}{99}" 
   write$ newline$
   "\expandafter\ifx\csname url\endcsname\relax"
   write$ newline$
