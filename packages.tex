@@ -41,34 +41,35 @@
 \usepackage[normalem]{ulem}%for strikethroughs
 
 %% Figure packages---------------%-------------------------------
+\usepackage{graphicx}
+
+\usepackage{ifpdf}
+\ifpdf
+        %% PDFTeX primitives
+        %\pdfcompresslevel=9 
+        %\pdfimageresolution=10
+	\pdfminorversion=7 %PDF version compatibility
+	%% EPS to PDF settings
+        %  In previous versions of epstopdf, it was required to specify the .eps conversion
+        %  rules. Now those commands destroy both the original .eps file and the .pdf output. It
+        %  used to be that in order for these commands to work, the tag -enable-write18 had to be
+        %  included in command line arguments to make PDF figures (deprecated).
+        \usepackage[update]{epstopdf}
+        %\epstopdfDeclareGraphicsRule{.eps}{pdf}{.pdf}{ps2pdf -dEPSCrop #1 \OutputFile}
+	%\epstopdfDeclareGraphicsRule{_bw.eps}{pdf}{_bw.pdf}{ps2pdf -dEPSCrop #1 \OutputFile}
+        %\epstopdfsetup{suffix=-\SourceExt-converted-to}%This line explicitly defines the default behavior
+        \epstopdfsetup{suffix=}%
+\else
+\usepackage[all,light]{draftcopy}% Places "DRAFT" on each page.  Only works with PS output.	
+\fi
+%% File names and directories
 %  The following lines of code assume that the graphics files are .eps files located in a
 %  directory named Figures.  Black and white versions of color graphics files end in _bw.  For
 %  example, the two files
 %			/Figures/foo.eps
 %			/Figures/foo_bw.eps
 %  may be included with a single command, e.g., \includegraphics{foo}.  The black and white
-%  figures are then selected by uncommenting the declare graphics extension rule below. In 
-%  previous versions of epstopdf, it was required to specify the .eps conversion rules. Now those
-%  commands destroy both the original .eps file and the .pdf output. It used to be that in order
-%  for these commands to work, the tag -enable-write18 had to be included in command line 
-%  arguments to make PDF figures (deprecated)
-
-\usepackage{ifpdf}
-\ifpdf
-	\pdfminorversion=7 %PDF version compatability
-	\usepackage{graphicx}
-	\usepackage[update]{epstopdf}
-	%\pdfimageresolution=10
-	%\pdfcompresslevel=9 
-	%\epstopdfDeclareGraphicsRule{.eps}{pdf}{.pdf}{ps2pdf -dEPSCrop #1 \OutputFile}
-	%\epstopdfDeclareGraphicsRule{_bw.eps}{pdf}{_bw.pdf}{ps2pdf -dEPSCrop #1 \OutputFile}
-        %\epstopdfsetup{suffix=-\SourceExt-converted-to}%This line explicitly defines the default behavior
-        \epstopdfsetup{suffix=}%
-\pdfoptionpdfminorversion=6
-\else
-\usepackage{graphicx}	
-\usepackage[all,light]{draftcopy}% Places "DRAFT" on each page.  Only works with PS output.	
-\fi
+%  figures are then selected by uncommenting the declare graphics extension rule below.
 %\DeclareGraphicsExtensions{_bw.eps,.eps}	%Turn on/off BW figures, assumes BW figures end in _bw.eps
 %\graphicspath{{Figures/}}%set graphics path(s) here
 \graphicspath{{Figures/}{../Figures/BW_Figures/}{../Figures/}} %Uniquely-named B&W figures
