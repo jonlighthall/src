@@ -1,15 +1,12 @@
 %% Date settings-----------------%-------------------------------
-\usepackage{fmtcount,datetime} %provides commands for displaying times and dates
+%  This file provides definitions and commands to prints the time of compiling.
+
+\usepackage{datetime} %provides commands for displaying times and dates
 \usepackage{setspace}
 
-\newdateformat{photodate}{\shortmonthname[\THEMONTH]~\THEYEAR}
-\newdateformat{longusdate}{%standard long date format
-\dayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR}, \monthname[\THEMONTH] \ordinal{DAY}, \THEYEAR}
-\newdateformat{shortusdate}{%standard short date format
-\shortdayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR}, \shortmonthname[\THEMONTH] \ordinal{DAY}, \THEYEAR}
-
 %  Time zone definitions, for the command \timezone.
-% Requires latexmkrc file on Overleaf
+%  On Overleafm the timezone command requires a file named latexmkrc with the following contents
+% $ENV{'TZ'}='America/Chicago';
 \makeatletter
 \newif\ifdst
 % set daylight saving time
@@ -26,7 +23,6 @@
   \@namedef{timezone-0700}{MST}
   \@namedef{timezone-0800}{PST}
 \fi
-
 \def\grabtimezone #1#2#3#4#5#6#7#8#9{\grabtimezoneB}
 \def\grabtimezoneB #1#2#3#4#5#6#7{\grabtimezoneC}
 \def\grabtimezoneC #1#2'#3'{%
@@ -37,27 +33,24 @@
 \def\timezone{\expandafter\grabtimezone\pdfcreationdate}% called with \timezone.
 \makeatother
 
-\newcommand{\smalltimestamp}{Updated \shortusdate\today{} \currenttime{} \timezone.}
-
+% formats
+\newdateformat{photodate}{\shortmonthname[\THEMONTH]~\THEYEAR}
+\newdateformat{longusdate}{%standard long date format
+\dayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR}, \monthname[\THEMONTH] \ordinal{DAY}, \THEYEAR}
+\newdateformat{shortusdate}{%standard short date format
+\shortdayofweekname{\THEDAY}{\THEMONTH}{\THEYEAR}, \shortmonthname[\THEMONTH] \ordinal{DAY}, \THEYEAR}
 \newdateformat{reallyshortusdate}{%standard short date format
 \THEYEAR-\THEMONTH-\THEDAY}
-\newcommand{\reallysmalltimestamp}{\reallyshortusdate\today{} \currenttime{} \timezone}
 
+% time stamps
+\newcommand{\smalltimestamp}{Updated \shortusdate\today{} \currenttime{} \timezone.}
+\newcommand{\reallysmalltimestamp}{\reallyshortusdate\today{} \currenttime{} \timezone}
 \newcommand{\timestamp}{%
 At the time of compiling, today is \longusdate\today{} and the current time is \currenttime{} 
 \ifthenelse{\THEHOUR<12}{{}(\amstring) }{%
 \ifthenelse{\THEHOUR=12}{{}(\pmstring) }{}}% 
 \timezone.%
 }
-
-%% This file prints the time of compiling.
-%  Requires package datetime.
-%  Requires the following commands to be defined: longusedate, timezone, changemargin
-%  The prerequisite commands are defined in packages.tex
-%  Note: the timezone command requires latexmkrc file on Overleaf
-% the contents of the file should be as follows
-% $ENV{'TZ'}='America/Chicago';
-
 \newcommand{\terminaltimestamp}{%
 %\nopagebreak[4]
 %\AtEndDocument{
