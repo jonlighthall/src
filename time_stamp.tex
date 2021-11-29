@@ -53,6 +53,7 @@ At the time of compiling, today is \longusdate\today{} and the current time is \
 %  The prerequisite commands are defined in packages.tex
 %  Note: the timezone command requires latexmkrc file on Overleaf
 
+\newcommand{\terminaltimestamp}{%
 %\nopagebreak[4]
 %\AtEndDocument{
 %% The need to include one of the following two lines may be system dependent.
@@ -68,14 +69,13 @@ At the time of compiling, today is \longusdate\today{} and the current time is \
 \newenvironment{changemargintt}[1]{%
 \begin{list}{}{%
 \setlength{\topsep}{0pt}%
-\setlength{\leftmargin}{#1}%
-\setlength{\rightmargin}{#1}%
+\setlength{\leftmargin}{##1}%
+\setlength{\rightmargin}{##1}%
 \setlength{\listparindent}{\parindent}%
 \setlength{\itemindent}{\parindent}%
 \setlength{\parsep}{\parskip}%
 }%\centering%
 \item[]}{\end{list}}
-
 
    \begin{singlespace}
          \begin{center}
@@ -102,3 +102,4 @@ At the time of compiling, today is \longusdate\today{} and the current time is \
 \end{singlespace}
 %\marginpar{\color{white}\texttt{J/\textbackslash C\textbar\textless @L}}
 %}
+}
