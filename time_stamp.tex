@@ -39,6 +39,10 @@
 
 \newcommand{\smalltimestamp}{Updated \shortusdate\today{} \currenttime{} \timezone.}
 
+\newdateformat{reallyshortusdate}{%standard short date format
+\THEYEAR-\THEMONTH-\THEDAY}
+\newcommand{\reallysmalltimestamp}{\reallyshortusdate\today{} \currenttime{} \timezone}
+
 \newcommand{\timestamp}{%
 At the time of compiling, today is \longusdate\today{} and the current time is \currenttime{} 
 \ifthenelse{\THEHOUR<12}{{}(\amstring) }{%
