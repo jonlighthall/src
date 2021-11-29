@@ -13,7 +13,7 @@
 \makeatletter
 \newif\ifdst
 % set daylight saving time
-\dsttrue
+\dstfalse
 % set time zone names
 \ifdst
   \@namedef{timezone-0400}{EDT}
@@ -46,12 +46,13 @@ At the time of compiling, today is \longusdate\today{} and the current time is \
 \timezone.%
 }
 
-
 %% This file prints the time of compiling.
 %  Requires package datetime.
 %  Requires the following commands to be defined: longusedate, timezone, changemargin
 %  The prerequisite commands are defined in packages.tex
 %  Note: the timezone command requires latexmkrc file on Overleaf
+% the contents of the file should be as follows
+% $ENV{'TZ'}='America/Chicago';
 
 \newcommand{\terminaltimestamp}{%
 %\nopagebreak[4]
