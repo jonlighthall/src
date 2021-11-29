@@ -39,6 +39,14 @@
 
 \newcommand{\smalltimestamp}{Updated \shortusdate\today{} \currenttime{} \timezone.}
 
+\newcommand{\timestamp}{%
+At the time of compiling, today is \longusdate\today{} and the current time is \currenttime{} 
+\ifthenelse{\THEHOUR<12}{{}(\amstring) }{%
+\ifthenelse{\THEHOUR=12}{{}(\pmstring) }{}}% 
+\timezone.%
+}
+
+
 %% This file prints the time of compiling.
 %  Requires package datetime.
 %  Requires the following commands to be defined: longusedate, timezone, changemargin
@@ -56,6 +64,19 @@
       \fi
 \makeatother
 
+%% The following command allows the margins to be reduced by the following amount. Used for indenting regions.
+\newenvironment{changemargintt}[1]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#1}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%\centering%
+\item[]}{\end{list}}
+
+
    \begin{singlespace}
          \begin{center}
            \rule[0 pt]{\linewidth}{0.5pt}\\	
@@ -69,17 +90,14 @@
 %\input{colophon}
 %\vspace*{\stretch{1}}
 %\input{src/time_stamp}
-\begin{changemargin}{-\marginparwidth}%
+\begin{changemargintt}{-\marginparwidth}%
 {%\footnotesize
 \begin{center}
-At the time of compiling, today is \longusdate\today{} and the current time is \currenttime{} 
-\ifthenelse{\THEHOUR<12}{{}(\amstring) }{%
-\ifthenelse{\THEHOUR=12}{{}(\pmstring) }{}}% 
-\timezone.%
+\timestamp
 %%\\\enlargethispage{\baselineskip}{\color{white}Document designed by Jonathan C. Lighthall}
 \end{center}
 }
-\end{changemargin}
+\end{changemargintt}
 \end{center}
 \end{singlespace}
 %\marginpar{\color{white}\texttt{J/\textbackslash C\textbar\textless @L}}
