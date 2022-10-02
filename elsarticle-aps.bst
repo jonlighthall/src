@@ -1368,7 +1368,11 @@ FUNCTION {output.web.refs}
   new.block
   output.url
   addeprints eprint empty$ not and
-    { format.eprint output.nonnull }
+    { format.eprint 
+      mid.sentence 'output.state := 
+      output.nonnull.original
+      after.block 'output.state := 
+    }
     'skip$
   if$
   adddoiresolver doi empty$ not and
